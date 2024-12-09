@@ -1,0 +1,227 @@
+LAMMPS (17 Feb 2022)
+variable temp index 100000 90000 81000 72900 65610 59049 53144 47829 43046 38741 34866 31379 28241 25416 22874 20586 18527 16674 15006 13505 12154 10938 9844 8859 7973 7175 6457 5811 5229 4706 4235 3811 3429 3086 2777 2499 2249 2024 1821 1638 1474 1326 1193 1073 965 868 781 702 631 567 510 459 413 371 333 299 269 242 217 195 175 157 141 126 113 101 90 81 72 64 57 51 45 40 36 32 28 25 22 19 17 15 13 11 9 8 7 6 5 4 3 2 1
+
+variable rand equal round(random(0,1e7,452345))
+
+include settings.lmp
+units              real
+atom_style         full
+timestep	   0.5
+boundary	   p p p
+
+pair_style         lj/cut/coul/long 12.0
+kspace_style       pppm 1.0e-6
+
+pair_modify        mix arithmetic
+special_bonds      amber
+neighbor           2.0 bin
+neigh_modify       every 1 delay 0 check yes
+
+read_data tri_Fd3m_3x3x3.data
+Reading data file ...
+  triclinic box = (-0.258417 -0.258417 -0.258417) to (25.181583 25.181583 25.181583) with tilt (0 0 0)
+  2 by 2 by 2 MPI processor grid
+  reading atoms ...
+  1512 atoms
+  reading velocities ...
+  1512 velocities
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.8333333333333334
+     0 = max # of 1-2 neighbors
+     0 = max # of 1-3 neighbors
+     0 = max # of 1-4 neighbors
+     1 = max # of special neighbors
+  special bonds CPU = 0.001 seconds
+  read_data CPU = 0.009 seconds
+kspace_style pppm 1.0e-6
+
+include ff_formic_acid_fe304.param
+#####################-----magnetite-----#########################################
+
+mass  1   55.845   # Iron(II)
+mass  2   55.845   # Iron(III)
+mass  3   15.9994  # Bridging oxygen
+
+pair_coeff  1  1   9.0298e-07  4.90620  # fe2
+pair_coeff  2  2   9.0298e-07  4.90620  # fe3
+pair_coeff  3  3   0.1554      3.16554  # ob
+
+##################################################################################
+
+dump dmp all custom 1000 swap.lammpstrj id mol type q x y z
+dump_modify dmp sort id
+
+group  fe type 1 2
+648 atoms in group fe
+variable nfe equal count(fe)
+variable nmc equal round((${nfe}*${nfe})/4)
+variable nmc equal round((648*${nfe})/4)
+variable nmc equal round((648*648)/4)
+
+compute coord fe coord/atom cutoff 2.0
+dump coord fe custom 1 fe.coord id type c_coord
+dump_modify coord sort id
+run  0
+WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:340)
+  G vector (1/distance) = 0.2971196
+  grid = 40 40 40
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00037285856
+  estimated relative force accuracy = 1.1228525e-06
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 24389 8000
+  generated 3 of 3 mixed pair_coeff terms from arithmetic mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 14
+  ghost atom cutoff = 14
+  binsize = 7, bins = 4 4 4
+  2 neighbor lists, perpetual/occasional/extra = 1 1 0
+  (1) pair lj/cut/coul/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton/tri
+      stencil: half/bin/3d/tri
+      bin: standard
+  (2) compute coord/atom, occasional
+      attributes: full, newton on
+      pair build: full/bin
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 13.01 | 13.01 | 13.01 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0   -282119.82            0   -282119.82    1192.6469 
+Loop time of 1.575e-06 on 8 procs for 0 steps with 1512 atoms
+
+111.1% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 0          | 0          |   0.0 |  0.00
+Kspace  | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 1.575e-06  |            |       |100.00
+
+Nlocal:            189 ave         191 max         187 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+Nghost:         5819.5 ave        5821 max        5818 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+Neighs:         101601 ave      102683 max      100519 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+FullNghs:       203202 ave      205366 max      201038 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+
+Total # of neighbors = 1625616
+Ave neighs/atom = 1075.1429
+Ave special neighs/atom = 0
+Neighbor list builds = 0
+Dangerous builds = 0
+variable fet atom c_coord==4
+group fet variable fet
+216 atoms in group fet
+group feo subtract fe fet
+432 atoms in group feo
+undump coord
+
+set group all mol 0
+Setting atom values ...
+  1512 settings made for mol
+set group fet mol 1
+Setting atom values ...
+  216 settings made for mol
+set group feo mol 2
+Setting atom values ...
+  432 settings made for mol
+
+variable fet3 atom "gmask(fet) && q == 1.575"
+group fet3 dynamic fe var fet3 every 100
+dynamic group fet3 defined
+variable rfet3 equal count(fet3)/count(fet)
+
+variable feo3 atom "gmask(feo) && q == 1.575"
+group feo3 dynamic fe var feo3 every 100
+dynamic group feo3 defined
+variable rfeo3 equal count(feo3)/count(feo)
+
+variable cnum equal 93
+
+label temp_loop
+
+  variable ftemp equal v_temp
+
+  fix npt all npt temp 50.0 50.0 $(10.0*dt) tri 100.0 100.0 $(100.0*dt)
+  fix npt all npt temp 50.0 50.0 5 tri 100.0 100.0 $(100.0*dt)
+  fix npt all npt temp 50.0 50.0 5 tri 100.0 100.0 50
+  fix swp fe atom/swap 1 1 ${rand} 200000 ke no types 1 2
+  fix swp fe atom/swap 1 1 855824 200000 ke no types 1 2
+  velocity all create 50.0 ${rand} rot yes mom yes dist gaussian
+  velocity all create 50.0 710414 rot yes mom yes dist gaussian
+  thermo 10000
+  thermo_style custom step v_ftemp pe f_swp[1] f_swp[2] v_rfet3 v_rfeo3 cella cellb cellc cellalpha cellbeta cellgamma
+  run 50000
+PPPM initialization ...
+  using 12-bit tables for long-range coulomb (../kspace.cpp:340)
+  G vector (1/distance) = 0.2971196
+  grid = 40 40 40
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.00037285856
+  estimated relative force accuracy = 1.1228525e-06
+  using double precision KISS FFT
+  3d grid and FFT values/proc = 24389 8000
+  generated 3 of 3 mixed pair_coeff terms from arithmetic mixing rule
+Per MPI rank memory allocation (min/avg/max) = 11.75 | 11.75 | 11.75 Mbytes
+Step v_ftemp PotEng f_swp[1] f_swp[2] v_rfet3 v_rfeo3 Cella Cellb Cellc CellAlpha CellBeta CellGamma 
+       0       100000   -282119.82            0            0            1          0.5        25.44        25.44        25.44           90           90           90 
+   10000       100000   -284167.13        10000         9228   0.63888889   0.68055556    25.529941    25.566598    25.561331    90.078799    89.995256    89.951997 
+   20000       100000    -284085.4        20000        18349   0.67592593   0.66203704    25.537577    25.548636    25.535922    90.007771    90.008653    90.008845 
+   30000       100000   -284344.74        30000        27567    0.7037037   0.64814815    25.522025    25.510623    25.532963    89.986949     90.06242    89.964681 
+   40000       100000   -284020.18        40000        36788   0.69907407   0.65046296    25.560567    25.567673    25.509455    90.058822    89.966059    89.968379 
+   50000       100000   -284029.73        50000        45943   0.69444444   0.65277778    25.526668    25.552021    25.530901    90.016022    89.990719    89.969753 
+Loop time of 1116.81 on 8 procs for 50000 steps with 1512 atoms
+
+Performance: 1.934 ns/day, 12.409 hours/ns, 44.770 timesteps/s
+95.5% CPU use with 8 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 73.628     | 75.171     | 76.801     |  14.2 |  6.73
+Bond    | 0.0040771  | 0.005632   | 0.0077978  |   1.7 |  0.00
+Kspace  | 120.4      | 125.08     | 131.17     |  29.7 | 11.20
+Neigh   | 172.85     | 177.42     | 180.45     |  16.8 | 15.89
+Comm    | 23.444     | 23.503     | 23.578     |   0.8 |  2.10
+Output  | 0.018936   | 0.020452   | 0.022196   |   0.7 |  0.00
+Modify  | 714.88     | 714.93     | 714.98     |   0.1 | 64.02
+Other   |            | 0.6744     |            |       |  0.06
+
+Nlocal:            189 ave         191 max         187 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+Nghost:         5819.5 ave        5821 max        5818 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+Neighs:         100440 ave      101756 max       98906 min
+Histogram: 2 1 1 0 0 0 0 0 0 4
+FullNghs:       203202 ave      205366 max      201038 min
+Histogram: 4 0 0 0 0 0 0 0 0 4
+
+Total # of neighbors = 1625616
+Ave neighs/atom = 1075.1429
+Ave special neighs/atom = 0
+Neighbor list builds = 100000
+Dangerous builds = 0
+
+  variable cnum equal ${cnum}-1
+  variable cnum equal 93-1
+
+  unfix npt
+  unfix swp
+  thermo_style custom step temp pe
+
+  quit

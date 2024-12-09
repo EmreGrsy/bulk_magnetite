@@ -1,0 +1,43 @@
+variable 	q2 equal 1.050 #charge of Fe(II)
+variable	q3 equal 1.575 #charge of Fe(III)
+variable 	rand equal round(random(0,1e7,452345))
+
+units           real
+atom_style      full
+boundary        p p p
+timestep        0.0005 # is a 0.5 fs timestep
+
+# modified CLAYFF parameters from Kerisit (2011)
+pair_style      lj/cut/coul/long 12.0
+
+read_data       mFd3m.data
+
+replicate       3 3 3
+kspace_style    pppm 1e-6
+
+group 		Fe type 1 2
+group 		FeO type 1
+group		FeT type 2
+group 		O type 3
+
+variable 	nFeO equal count(FeO)
+variable 	nFeT equal count(FeT)
+variable	nO equal count(O)
+
+variable 	r equal ${nFeO}-round(${nFeO}*(${nFeT}*${q3}+${nFeO}*${q3}-${nO}*${q2})/(${nFeO}*${q3}-${nFeO}*${q2}))
+# reset all charges of FeO to Fe(II) (1.050e)
+set 		type 1 charge ${q2}
+# ... and set some random subset of FeO and all FeT to Fe(III) (1.575e)
+set group 	FeO type/subset 2 $r ${rand}
+set 		type 2 charge  ${q3}
+
+variable 	qtot equal charge(all)
+print 		"total charge of system: ${qtot}"
+
+variable 	Fe2 atom "q == 1.050"
+variable 	Fe3 atom "q == 1.575"
+group 		Fe2 variable Fe2
+group 		Fe3 variable Fe3
+
+
+write_data     Fd3m_3x3x3.data

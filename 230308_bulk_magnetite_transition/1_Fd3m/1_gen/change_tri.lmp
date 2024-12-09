@@ -1,0 +1,13 @@
+variable rand equal 8970987987123
+  
+include settings.lmp
+
+read_data Fd3m_3x3x3.data
+
+include ff_formic_acid_fe304.param
+
+change_box all triclinic
+set group all image 0 0 0
+kspace_style pppm 1.0e-6
+
+write_data tri_Fd3m_3x3x3.data

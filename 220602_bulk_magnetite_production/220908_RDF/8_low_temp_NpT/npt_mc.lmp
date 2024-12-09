@@ -1,0 +1,46 @@
+variable rand index 89709
+
+include settings.lmp
+
+read_data magnetite_3x3x3_low_temp.data
+
+kspace_style       pppm 1.0e-6
+
+include ff_formic_acid_fe304.param
+
+dump dmp all custom 1000 swap.lammpstrj id mol type q x y z
+dump_modify dmp sort id
+
+group fe type 1 2 4 5
+group swp type 4 5 
+variable nfe equal count(fe)
+
+compute coord fe coord/atom cutoff 2
+dump coord fe custom 1 fe.coord id type c_coord
+dump_modify coord sort id
+run  0
+variable  fet atom c_coord==4
+group fet variable fet
+group feo subtract fe fet
+undump coord
+
+set group all mol 0
+set group fet mol 1
+set group feo mol 2
+
+variable  fet3 atom "gmask(fet) && q == 1.575"
+group  fet3 dynamic fe var fet3 every 100
+variable  rfet3 equal count(fet3)/count(fet)
+
+variable  feo3 atom "gmask(feo) && q == 1.575"
+group  feo3 dynamic fe var feo3 every 100
+variable  rfeo3 equal count(feo3)/count(feo)
+
+fix             npt2 all npt temp 300.0 300.0 100.0 tri 1.0 1.0 100.0
+fix             swp swp atom/swap 10 1 ${rand} 300.0 ke no types 4 5
+velocity        all create 300.0 ${rand} rot yes mom yes dist gaussian
+thermo_style    custom step temp pe f_swp[1] f_swp[2] v_rfet3 v_rfeo3 cella cellb cellc cellalpha cellbeta cellgamma
+thermo          1000
+run             20000000
+
+write_data magnetite_3x3x3_3e2_npt.data

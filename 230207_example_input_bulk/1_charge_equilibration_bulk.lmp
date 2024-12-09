@@ -1,0 +1,39 @@
+variable        q1 equal -1.050 #charge of O
+variable 	q2 equal 1.050 #charge of Fe(II)
+variable	q3 equal 1.575 #charge of Fe(III)
+variable 	rand equal round(random(0,1e7,452345))
+
+units           real
+atom_style      full
+boundary        p p p
+timestep        0.5
+
+pair_style      lj/cut/coul/long 12.0
+
+read_data       mFd3m.data
+
+replicate       3 3 3
+kspace_style    pppm 1e-6
+
+group 		Fe type 1 2
+group 		O type 3
+
+set		group O type 1
+set             group Fe type 2
+
+variable 	nFe equal count(Fe)
+variable	nO equal count(O)
+
+variable	nFe_3 equal ((${nFe}*${q2}+${nO}*${q1})/(${q2}-${q3}))
+
+set 		group Fe type/subset 3 ${nFe_3} ${rand}
+
+set		type 1 charge ${q1}
+set		type 2 charge ${q2}
+set		type 3 charge ${q3}
+
+# Sanity check.
+variable        qtot equal charge(all)
+print           "total charge of system: ${qtot}"
+
+write_data     magnetite_bulk_3x3.data

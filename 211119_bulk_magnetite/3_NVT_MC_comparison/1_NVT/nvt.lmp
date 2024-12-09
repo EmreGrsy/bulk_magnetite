@@ -1,0 +1,17 @@
+variable        rand equal round(random(0,1e7,452345))
+
+include		settings.lmp
+  
+read_data       magnetite_bulk_swp_3x3x3.data
+
+dump		dmp all custom 10000 swap.lammpstrj id mol type q x y z
+dump_modify	dmp sort id
+
+group		fe type 1 2 
+
+fix             nvt all nvt temp 300.0 300.0 0.01
+velocity        all create 300.0 ${rand} rot yes mom yes dist gaussian
+thermo_style    custom step temp pe
+run             20000000
+
+write_data	magnetite_bulk_3x3_10ns_nvt_300K.data

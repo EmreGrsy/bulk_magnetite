@@ -1,0 +1,41 @@
+variable temp index 100000 90000 81000 72900 65610 59049 53144 47829 43046 38741 34866 31379 28241 25416 22874 20586 18527 16674 15006 13505 12154 10938 9844 8859 7973 7175 6457 5811 5229 4706 4235 3811 3429 3086 2777 2499 2249 2024 1821 1638 1474 1326 1193 1073 965 868 781 702 631 567 510 459 413 371 333 299 269 242 217 195 175 157 141 126 113 101 90 81 72 64 57 51 45 40 36 32 28 25 22 19 17 15 13 11 9 8 7 6 5 4 3 2 1
+
+variable	rand equal round(random(0,1e7,452345))
+
+units		real
+atom_style	full
+timestep	1.0
+boundary	p p p
+
+pair_style	lj/cut/coul/long 12.0
+kspace_style	pppm 1.0e-6
+
+pair_modify	mix arithmetic
+neighbor	2.0 bin
+neigh_modify	every 1 delay 0 check yes
+
+read_data	magnetite_bulk.data
+
+dump 		dmp all custom 1000 swap.lammpstrj id mol type q x y z
+dump_modify	dmp sort id
+
+group		fe type 1 2
+variable	nfe equal count(fe)
+variable	nsteps equal round(${nfe}*${nfe})  # At each temperature perform nfe*nfe MC swaps.
+
+label temp_loop
+
+  fix  		swp fe atom/swap 1 1 ${rand} ${temp} ke no types 1 2
+  thermo  	1000
+  thermo_style 	custom step pe f_swp[1] f_swp[2] 
+  run  		${nsteps}
+  
+  unfix 	swp
+  thermo_style	custom step temp pe
+
+next		temp
+jump		SELF temp_loop
+label		break
+
+thermo_style	custom step temp pe
+write_data	magnetite_3x3_swp.data

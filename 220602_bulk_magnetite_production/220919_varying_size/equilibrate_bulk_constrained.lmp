@@ -1,0 +1,37 @@
+variable temp index 100000 90000 81000 72900 65610 59049 53144 47829 43046 38741 34866 31379 28241 25416 22874 20586 18527 16674 15006 13505 12154 10938 9844 8859 7973 7175 6457 5811 5229 4706 4235 3811 3429 3086 2777 2499 2249 2024 1821 1638 1474 1326 1193 1073 965 868 781 702 631 567 510 459 413 371 333 299 269 242 217 195 175 157 141 126 113 101 90 81 72 64 57 51 45 40 36 32 28 25 22 19 17 15 13 11 9 8 7 6 5 4 3 2 1
+
+variable rand equal round(random(0,1e7,452345))
+
+include settings.lmp
+
+read_data magnetite_3x3x3_swp_constrained.data
+
+dump dmp all custom 1000 swap.lammpstrj id mol type q x y z
+dump_modify dmp sort id
+
+group feo type 4 5
+#group fe type 1 2 4 5 
+variable nfe equal count(feo)
+variable nsteps equal round(${nfe}*${nfe})  # Each 100K there are fe*fe swap attempts.
+variable pe1 equal 0.0  # Initial pe decleration
+
+variable cnum equal 93
+
+label temp_loop
+
+  variable ftemp equal v_temp
+  fix swp feo atom/swap 1 1 ${rand} ${temp} ke no types 4 5
+  thermo  1000
+  thermo_style custom step v_ftemp pe f_swp[1] f_swp[2]
+  run  ${nsteps}
+  unfix swp
+
+  variable cnum equal ${cnum}-1
+  thermo_style custom step temp pe
+
+next temp
+jump SELF temp_loop
+label break
+
+thermo_style custom step temp pe
+write_data magnetite_4x4x4_swp.data

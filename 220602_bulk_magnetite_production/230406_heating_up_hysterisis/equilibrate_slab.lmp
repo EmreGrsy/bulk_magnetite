@@ -1,0 +1,57 @@
+variable temp index 333 371 413 459 510 567 631 702 781 868 965 1073 1193 1326 1474 1638 1821 2024 2249 2499 2777 3086 3429 3811 4235 4706 5229 5811 6457 7175 7973 8859 9844 10938 12154 13505 15006 16674 18527 20586 22874 25416 28241 31379 34866 38741 43046 47829 53144 59049 65610 72900 81000 90000 100000
+
+variable rand equal round(random(0,1e7,452345))
+
+include settings.lmp
+
+read_data magnetite_3x3_swp.data
+
+include ff_formic_acid_fe304.param
+
+dump dmp all custom 1000 swap.lammpstrj id mol type q x y z
+dump_modify dmp sort id
+
+group fe type 1 2
+variable nfe equal count(fe)
+variable nsteps equal round(${nfe}*${nfe})  # Each 100K there are fe*fe swap attempts.
+variable pe1 equal 0.0  # Initial pe decleration
+
+compute coord fe coord/atom cutoff 2.0
+dump coord  fe custom 1 fe.coord id type c_coord
+dump_modify  coord sort id
+run  0
+variable  fet atom c_coord==4
+group  fet variable fet
+group  feo subtract fe fet
+undump  coord
+
+set  group all mol 0
+set  group fet mol 1
+set  group feo mol 2
+
+variable fet3 atom "gmask(fet) && q == 1.575"
+group fet3 dynamic fe var fet3 every 100
+variable rfet3 equal count(fet3)/count(fet)
+
+variable feo3 atom "gmask(feo) && q == 1.575"
+group feo3 dynamic fe var feo3 every 100
+variable rfeo3 equal count(feo3)/count(feo)
+
+label temp_loop
+
+  variable ftemp equal v_temp
+  # Electrostatic relaxation-long
+  fix  swp fe atom/swap 1 1 ${rand} ${temp} ke no types 1 2
+  thermo  1000
+  thermo_style custom step v_ftemp pe f_swp[1] f_swp[2] v_rfet3 v_rfeo3
+  run  ${nsteps}
+
+  unfix swp
+  thermo_style custom step temp pe
+
+next temp
+jump SELF temp_loop
+label break
+
+thermo_style custom step temp pe
+write_data magnetite_3x3_highT.data
