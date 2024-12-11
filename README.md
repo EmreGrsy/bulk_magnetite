@@ -4,7 +4,7 @@
 This repository contains scripts and data related to the bulk section of the following publication:  
 **Oxidation-State Dynamics and Emerging Patterns in Magnetite** 
 
-<img src="TOC2.png" alt="Table of Contents Figure" width="45%">(https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290) 
+[!<img src="TOC2.png" alt="Table of Contents Figure" width="45%">](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290) 
 
 ## Overview  
 This repository provides scripts and data used for studing the structural and thermodynamic properties of bulk magnetite through oxidation state swaps. The scripts support tasks such as oxidation state minimization, analyzing radial distribution functions (RDF), comparing ensembles, exploring different minimization schemes, and investigating phenomena like trimerons and phase transitions.
