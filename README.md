@@ -2,7 +2,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.1021/acs.jpclett.3c01290-blue)](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 This repository contains scripts and data related to our recent publication:  
-**[Title of the Paper]**  
+**Oxidation-State Dynamics and Emerging Patterns in Magnetite**  
 Published in *The Journal of Physical Chemistry Letters*.  
 
 ## Overview  
