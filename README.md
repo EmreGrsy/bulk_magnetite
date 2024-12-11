@@ -4,7 +4,7 @@
 This repository contains scripts and data related to the bulk section of the following publication:  
 **Oxidation-State Dynamics and Emerging Patterns in Magnetite** 
 
-<img src="TOC2.png" alt="Table of Contents Figure" width="30%">
+<img src="TOC2.png" alt="Table of Contents Figure" width="45%">
 
 ## Overview  
 This repository is part of the computational workflow used to study the structural and thermodynamic properties of bulk magnetite. The provided scripts focus on [specific focus area, e.g., bulk section modeling], serving as a supplementary resource for the publication.  
