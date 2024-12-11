@@ -7,7 +7,7 @@ This repository contains scripts and data related to the bulk section of [**Oxid
 [<img src="bulk.png" alt="Table of Contents Figure" width="35%">](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290) 
 
 ## Overview  
-This repository provides scripts and data used for studing the structural and thermodynamic properties of bulk magnetite through oxidation state swaps. The scripts support tasks such as oxidation state minimization, analyzing radial distribution functions (RDF), comparing ensembles, exploring different minimization schemes, and investigating phenomena like trimerons and phase transitions.
+This repository includes scripts and data used for studing the structural and thermodynamic properties of bulk magnetite through oxidation state swaps. The scripts support tasks such as oxidation state minimization, analyzing radial distribution functions (RDF), comparing ensembles, exploring different minimization schemes, and investigating phenomena like trimerons and phase transitions.
 
 ## Repository Structure  
 ```
