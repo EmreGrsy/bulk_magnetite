@@ -12,6 +12,11 @@ This repository is part of the computational workflow used to study the structur
 bulk_magnetite/
 │
 ├── 211119_bulk_magnetite/               # Python/other scripts for simulations
+| ├── 1_generate_bulk
+| ├── 2_oxidation_state_min
+| ├── 3_NVT_MC_comparison
+| ├── 4_NpT_MC_comparison
+| ├── 5_oxidation_state_min_different_scheme
 ├── 220602_bulk_magnetite_production/                  # Input files or sample datasets
 ├── 230207_example_input_script/               # Example outputs or visualizations
 ├── 230308_bulk_magnetite_transition
