@@ -7,31 +7,33 @@ This repository contains scripts and data related to the bulk section of the fol
 <img src="TOC2.png" alt="Table of Contents Figure" width="45%">
 
 ## Overview  
-This repository is part of the computational workflow used to study the structural and thermodynamic properties of bulk magnetite. The provided scripts focus on [specific focus area, e.g., bulk section modeling], serving as a supplementary resource for the publication.  
+This repository provides scripts and data used to study the structural and thermodynamic properties of bulk magnetite through oxidation state swaps. The scripts support tasks such as oxidation state minimization, analyzing radial distribution functions (RDF), comparing ensembles, exploring different minimization schemes, and investigating phenomena like trimerons and phase transitions.
 
 ## Repository Structure  
 ```
 bulk_magnetite/
 │
-├── 211119_bulk_magnetite/               # Python/other scripts for simulations
-| ├── 1_generate_bulk/
-| ├── 2_oxidation_state_min/
-| ├── 3_NVT_MC_comparison/
-| | ├── 1_NVT/
-| | ├── 2_NVT_MC/
-| | ├── 3_analyze/
-| ├── 4_Npt_MC_comparison/
-| ├── 5_oxidation_state_min_different_scheme/
-├── 220602_bulk_magnetite_production/                  # Input files or sample datasets
-| ├── 220730_charge_ordering_and_swap_prob/
-| ├── 220908_RDF/
-| ├── 220919_varying_size/
-| ├── 221021_trimeron_analysis/
-| ├── 230406_heating_up_hysterisis/
-├── 230207_example_input_script/               # Example outputs or visualizations
-├── 230308_bulk_magnetite_transition/
-| ├── 1_Fd3m/
-| ├── 2_Cc/
+├── 211119_bulk_magnetite/        # Scripts for bulk magnetite oxidation state swaps
+│   ├── 1_generate_bulk/          # Generate bulk structures
+│   ├── 2_oxidation_state_min/    # Basic oxidation state minimization
+│   ├── 3_NVT_MC_comparison/      # Comparison of NVT and NVT+MC ensembles
+│   │   ├── 1_NVT/
+│   │   ├── 2_NVT_MC/
+│   │   ├── 3_analyze/
+│   ├── 4_NPT_MC_comparison/      # Comparison of NPT and NPT+MC ensembles
+│   ├── 5_oxidation_state_min_different_scheme/  # Alternative minimization schemes
+│
+├── 220602_bulk_magnetite_production/  # Results used in the publication
+│   ├── 220730_charge_ordering_and_swap_prob/  # Charge ordering and MC swap probabilities
+│   ├── 220908_RDF/              # Radial distribution function analysis
+│   ├── 220919_varying_size/     # Size effects and convergence checks
+│   ├── 221021_trimeron_analysis/  # Trimeron fingerprint analysis
+│   ├── 230406_heating_up_hysteresis/  # Swap probability with increasing $T^{MC}$
+│
+├── 230207_example_input_script/       # Example oxidation state swap scripts
+├── 230308_bulk_magnetite_transition/  # Fd3m -> Cc transition modeling
+│   ├── 1_Fd3m/
+│   ├── 2_Cc/
 └── README.md              # Repository documentation
 ```
 
