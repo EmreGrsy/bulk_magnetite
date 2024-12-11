@@ -32,16 +32,3 @@ If you use this repository, please cite the original paper:
   doi = {10.1021/acs.jpclett.3c01290}
 }
 ```
-
-## Contributing  
-Contributions, issues, and feature requests are welcome!  
-Please open an issue to discuss your ideas or report bugs.  
-
-## License  
-This repository is licensed under the [MIT License](LICENSE).  
-
-## Contact  
-For any questions or inquiries, please contact:  
-**Emre Gürsoy**  
-[Your Email Address]  
-[Your Professional Website or LinkedIn]  
