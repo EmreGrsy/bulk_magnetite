@@ -11,9 +11,10 @@ This repository is part of the computational workflow used to study the structur
 ```
 bulk_magnetite/
 │
-├── scripts/               # Python/other scripts for simulations
-├── data/                  # Input files or sample datasets
-├── results/               # Example outputs or visualizations
+├── 211119_bulk_magnetite/               # Python/other scripts for simulations
+├── 220602_bulk_magnetite_production/                  # Input files or sample datasets
+├── 230207_example_input_script/               # Example outputs or visualizations
+├── 230308_bulk_magnetite_transition
 └── README.md              # Repository documentation
 ```
 
