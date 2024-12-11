@@ -15,11 +15,18 @@ bulk_magnetite/
 | ├── 1_generate_bulk/
 | ├── 2_oxidation_state_min/
 | ├── 3_NVT_MC_comparison/
-| ├── 4_NpT_MC_comparison/
+| ├── 4_Npt_MC_comparison/
 | ├── 5_oxidation_state_min_different_scheme/
 ├── 220602_bulk_magnetite_production/                  # Input files or sample datasets
+| ├── 220730_charge_ordering_and_swap_prob/
+| ├── 220908_RDF/
+| ├── 220919_varying_size/
+| ├── 221021_trimeron_analysis/
+| ├── 230406_heating_up_hysterisis/
 ├── 230207_example_input_script/               # Example outputs or visualizations
 ├── 230308_bulk_magnetite_transition
+| ├── 1_Fd3m
+| ├── 2_Cc
 └── README.md              # Repository documentation
 ```
 
