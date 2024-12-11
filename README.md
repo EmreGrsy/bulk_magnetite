@@ -2,7 +2,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.1021/acs.jpclett.3c01290-blue)](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 This repository contains scripts and data related to the bulk section of the following publication:  
-**Oxidation-State Dynamics and Emerging Patterns in Magnetite** 
+[!**Oxidation-State Dynamics and Emerging Patterns in Magnetite**](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 
 [!<img src="TOC2.png" alt="Table of Contents Figure" width="45%">](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290) 
 
