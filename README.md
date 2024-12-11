@@ -30,10 +30,6 @@ bulk_magnetite/
 └── README.md              # Repository documentation
 ```
 
-- **scripts/**: [Brief description, e.g., contains Python scripts for modeling and analysis.]  
-- **data/**: [Brief description, e.g., sample input files for testing.]  
-- **results/**: [Brief description, e.g., example outputs generated from the scripts.]  
-
 ## Related Publications  
 If you use this repository, please cite the original paper:  
 ```bibtex
