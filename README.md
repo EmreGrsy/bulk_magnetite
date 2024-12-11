@@ -1,4 +1,4 @@
-# Bulk Magnetite Oxidation State Swaps Scripts
+# Bulk Magnetite
 
 [![DOI](https://img.shields.io/badge/DOI-10.1021/acs.jpclett.3c01290-blue)](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 This repository contains scripts and data related to the bulk section of the following publication:  
