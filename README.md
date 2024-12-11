@@ -15,6 +15,9 @@ bulk_magnetite/
 | ├── 1_generate_bulk/
 | ├── 2_oxidation_state_min/
 | ├── 3_NVT_MC_comparison/
+| | ├── 1_NVT/
+| | ├── 2_NVT_MC/
+| | ├── 3_analyze/
 | ├── 4_Npt_MC_comparison/
 | ├── 5_oxidation_state_min_different_scheme/
 ├── 220602_bulk_magnetite_production/                  # Input files or sample datasets
