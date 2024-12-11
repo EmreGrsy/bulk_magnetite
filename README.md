@@ -24,9 +24,9 @@ bulk_magnetite/
 | ├── 221021_trimeron_analysis/
 | ├── 230406_heating_up_hysterisis/
 ├── 230207_example_input_script/               # Example outputs or visualizations
-├── 230308_bulk_magnetite_transition
-| ├── 1_Fd3m
-| ├── 2_Cc
+├── 230308_bulk_magnetite_transition/
+| ├── 1_Fd3m/
+| ├── 2_Cc/
 └── README.md              # Repository documentation
 ```
 
