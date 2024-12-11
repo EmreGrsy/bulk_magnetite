@@ -1,8 +1,8 @@
 # Bulk Magnetite Supporting Scripts
 
-[![DOI](https://img.shields.io/badge/DOI-10.1021/acs.jpclett.3c01290-blue)](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 This repository contains scripts and data related to the bulk section of the following publication:  
-**Oxidation-State Dynamics and Emerging Patterns in Magnetite**  
+**Oxidation-State Dynamics and Emerging Patterns in Magnetite** 
+[![DOI](https://img.shields.io/badge/DOI-10.1021/acs.jpclett.3c01290-blue)](https://pubs.acs.org/doi/full/10.1021/acs.jpclett.3c01290)  
 
 ## Overview  
 This repository is part of the computational workflow used to study the structural and thermodynamic properties of bulk magnetite. The provided scripts focus on [specific focus area, e.g., bulk section modeling], serving as a supplementary resource for the publication.  
