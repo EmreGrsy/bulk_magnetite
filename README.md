@@ -36,7 +36,7 @@ bulk_magnetite/
 │   ├── 1_Fd3m/
 │   ├── 2_Cc/
 
-└── README.md              # Repository documentation
+└── README.md              
 ```
 
 ## Related Publications  
