@@ -28,12 +28,14 @@ bulk_magnetite/
 │   ├── 220908_RDF/              # Radial distribution function analysis
 │   ├── 220919_varying_size/     # Size effects and convergence checks
 │   ├── 221021_trimeron_analysis/  # Trimeron fingerprint analysis
-│   ├── 230406_heating_up_hysteresis/  # Swap probability with increasing $T^{MC}$
+│   ├── 230406_heating_up_hysteresis/  # Swap probability with increasing MC temperature
 │
-├── 230207_example_input_script/       # Example oxidation state swap scripts
+├── 230207_example_input_script/       # Example oxidation state swap scripts shared in the publication
+
 ├── 230308_bulk_magnetite_transition/  # Fd3m -> Cc transition modeling
 │   ├── 1_Fd3m/
 │   ├── 2_Cc/
+
 └── README.md              # Repository documentation
 ```
 
