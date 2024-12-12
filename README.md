@@ -27,7 +27,7 @@ bulk_magnetite/
 │   ├── 220730_charge_ordering_and_swap_prob/    # Charge ordering and MC swap probabilities
 │   ├── 220908_RDF/                              # Radial distribution function analysis
 │   ├── 220919_varying_size/                     # Size effects and convergence checks
-│   ├── 221021_trimeron_analysis/                # Trimeron fingerprint analysis
+│   ├── 221021_trimeron_analysis/                # Trimeron analysis
 │   ├── 230406_heating_up_hysteresis/            # Swap probability with increasing MC temperature
 │
 ├── 230207_example_input_script/                 # Example oxidation state swap scripts shared in the publication
